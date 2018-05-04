@@ -12,6 +12,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Vibration } from '@ionic-native/vibration';
+import { DataService } from './data.service';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { Vibration } from '@ionic-native/vibration';
     StatusBar,
     Vibration,
     SplashScreen,
+    DataService,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })

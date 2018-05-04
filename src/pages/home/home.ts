@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { NavController } from 'ionic-angular';
 import { Vibration } from '@ionic-native/vibration';
+import { DataService } from '../../app/data.service';
 
 @Component({
   selector: 'page-home',
@@ -9,21 +10,29 @@ import { Vibration } from '@ionic-native/vibration';
 })
 export class HomePage {
   icon: string = "happy";
-  mydata: string = "";
+  lastexplosion: string = "";
   lastExplosion: number = 0;
-
-  constructor(public navCtrl: NavController, private vibration: Vibration, private http: Http) {
+  errdata: string = "";
+  constructor(public navCtrl: NavController, private vibration: Vibration, private data: DataService) {
     setInterval(() => this.checkForExplosion(), 2000);
   }
 
   checkForExplosion() {
-    this.http.get("http://18.62.20.88:3000/team1").subscribe(
+    this.data.getLastTime().subscribe(
       res => {
-        this.mydata += res.text() + "\n";
+        if (this.lastexplosion === "")
+          this.lastexplosion = res.text();
+        else if (this.lastexplosion !== res.text()) {
+          this.lastexplosion = res.text();
+          this.makeVibe();
+        }
       },
-      err => {
-        this.mydata = err;
-      });
+      err => this.errdata = err
+    );
+  }
+
+  sendExplosion() {
+    this.data.updateLastTime().subscribe(res => { }, err => this.errdata = err);;
   }
 
   reset() {
