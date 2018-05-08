@@ -1,3 +1,11 @@
 page-about {
-
+    ion-content {
+        text-align: center;
+        button {
+            position: absolute;
+            top: 200px;
+            width: 300px;
+            font-size: 30pt;
+        }
+    }
 }

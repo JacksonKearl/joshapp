@@ -1,17 +1,31 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Contact
+      Details
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-list-header>Follow us on Twitter</ion-list-header>
+  
+  <ion-list radio-group [(ngModel)]="data.team">
+    <ion-list-header>
+      Team Number:
+    </ion-list-header>
+
     <ion-item>
-      <ion-icon name="ionic" item-start></ion-icon>
-      @ionicframework
+      <ion-label>Team1</ion-label>
+      <ion-radio value="1"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Team2</ion-label>
+      <ion-radio value="2"></ion-radio>
     </ion-item>
   </ion-list>
+
+  <ion-item>
+      <ion-label color="primary" stacked>IP Address</ion-label>
+      <ion-input placeholder="IP" [(ngModel)]="data.ip"></ion-input>
+  </ion-item>
 </ion-content>

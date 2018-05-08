@@ -3,15 +3,19 @@ import { Http } from '@angular/http';
 
 @Injectable()
 export class DataService {
-    url: string = "http://18.62.20.88:3000/team";
-    team: string = "1";
+    ip: string = "10.0.0.80:3000";
+    team: string = "1"; 
     constructor(private http: Http) { }
 
     public getLastTime() {
-        return this.http.get(this.url + this.team)
+        return this.http.get(this.getURL())
     }
 
     public updateLastTime() {
-        return this.http.post(this.url + this.team, "")
+        return this.http.post(this.getURL(), "")
     }
+
+    public getURL() {
+        return `http://${this.ip}/team${this.team}`;
+    } 
 }
